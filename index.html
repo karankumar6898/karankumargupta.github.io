@@ -61,12 +61,12 @@
         nav {
             position: fixed;
             top: 0; left: 0; right: 0;
-            z-index: 100;
+            z-index: 200;
             padding: 1rem 2.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 248, 240, 0.85);
+            background: rgba(255, 248, 240, 0.95);
             backdrop-filter: blur(16px);
             border-bottom: 2px dashed var(--butter);
         }
@@ -76,6 +76,8 @@
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--tomato);
+            position: relative;
+            z-index: 201;
         }
 
         .nav-links {
@@ -107,21 +109,21 @@
             transition: transform 0.3s;
         }
 
-        .nav-links a:hover {
-            color: var(--tomato);
-        }
+        .nav-links a:hover { color: var(--tomato); }
+        .nav-links a:hover::after { transform: translateX(-50%) scale(1); }
 
-        .nav-links a:hover::after {
-            transform: translateX(-50%) scale(1);
-        }
-
+        /* ─── Hamburger ─── */
         .hamburger {
             display: none;
             flex-direction: column;
+            justify-content: center;
             gap: 5px;
             cursor: pointer;
             background: none;
             border: none;
+            padding: 4px;
+            position: relative;
+            z-index: 201;
         }
 
         .hamburger span {
@@ -129,7 +131,75 @@
             width: 24px;
             height: 2px;
             background: var(--espresso);
-            transition: all 0.3s;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* ─── Mobile Nav Overlay ─── */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 199;
+            background: rgba(255, 248, 240, 0.98);
+            backdrop-filter: blur(12px);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .mobile-menu-overlay ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            width: 100%;
+        }
+
+        .mobile-menu-overlay ul li {
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px dashed var(--butter);
+        }
+
+        .mobile-menu-overlay ul li:first-child {
+            border-top: 1px dashed var(--butter);
+        }
+
+        .mobile-menu-overlay ul li a {
+            display: block;
+            padding: 1.2rem 2rem;
+            font-family: var(--hand);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--espresso);
+            transition: all 0.2s;
+        }
+
+        .mobile-menu-overlay ul li a:hover {
+            color: var(--tomato);
+            background: var(--warm);
         }
 
         /* ─── Hero ─── */
@@ -247,10 +317,7 @@
             animation: slideUp 0.7s ease forwards 0.7s;
         }
 
-        .hero-desc strong {
-            color: var(--espresso);
-            font-weight: 600;
-        }
+        .hero-desc strong { color: var(--espresso); font-weight: 600; }
 
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -391,7 +458,7 @@
             background: url("data:image/svg+xml,%3Csvg width='80' height='8' viewBox='0 0 80 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4C10 1 15 7 25 4C35 1 40 7 50 4C60 1 65 7 79 4' stroke='%23E94B3C' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
         }
 
-        /* ─── Today's Specials (About) ─── */
+        /* ─── About ─── */
         #about {
             background: var(--warm);
             border-top: 3px dashed var(--butter);
@@ -414,9 +481,7 @@
             margin-bottom: 1rem;
         }
 
-        .specials-text p strong {
-            color: var(--espresso);
-        }
+        .specials-text p strong { color: var(--espresso); }
 
         .chef-card {
             background: white;
@@ -429,9 +494,7 @@
             transition: transform 0.3s;
         }
 
-        .chef-card:hover {
-            transform: rotate(0deg);
-        }
+        .chef-card:hover { transform: rotate(0deg); }
 
         .chef-card-pin {
             position: absolute;
@@ -446,11 +509,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
-        .chef-emoji {
-            font-size: 4rem;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
+        .chef-emoji { font-size: 4rem; text-align: center; margin-bottom: 1rem; }
 
         .chef-card h3 {
             font-family: var(--display);
@@ -468,11 +527,7 @@
             margin-bottom: 1rem;
         }
 
-        .chef-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.75rem;
-        }
+        .chef-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 
         .chef-stat {
             text-align: center;
@@ -496,10 +551,8 @@
             margin-top: 0.15rem;
         }
 
-        /* ─── The Menu (Skills) ─── */
-        #skills {
-            background: var(--cream);
-        }
+        /* ─── Skills ─── */
+        #skills { background: var(--cream); }
 
         .menu-grid {
             display: grid;
@@ -535,10 +588,7 @@
             box-shadow: 6px 6px 0 var(--butter);
         }
 
-        .menu-card .card-icon {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-        }
+        .menu-card .card-icon { font-size: 2rem; margin-bottom: 0.75rem; }
 
         .menu-card h3 {
             font-family: var(--display);
@@ -555,11 +605,7 @@
             font-style: italic;
         }
 
-        .ingredients {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-        }
+        .ingredients { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 
         .ingredient {
             font-size: 0.75rem;
@@ -572,12 +618,9 @@
             transition: all 0.2s;
         }
 
-        .ingredient:hover {
-            background: var(--butter);
-            transform: scale(1.05);
-        }
+        .ingredient:hover { background: var(--butter); transform: scale(1.05); }
 
-        /* ─── Kitchen Experience (Timeline) ─── */
+        /* ─── Experience ─── */
         #experience {
             background: var(--charcoal);
             color: var(--cream);
@@ -659,9 +702,7 @@
             margin-bottom: 0.75rem;
         }
 
-        .kitchen-tasks {
-            list-style: none;
-        }
+        .kitchen-tasks { list-style: none; }
 
         .kitchen-tasks li {
             font-size: 0.92rem;
@@ -679,10 +720,8 @@
             font-size: 0.8rem;
         }
 
-        /* ─── Signature Dishes (Projects) ─── */
-        #projects {
-            background: var(--cream);
-        }
+        /* ─── Projects ─── */
+        #projects { background: var(--cream); }
 
         .dishes-grid {
             display: grid;
@@ -712,9 +751,7 @@
             background: linear-gradient(90deg, var(--tomato), var(--butter), var(--herb));
         }
 
-        .dish-content {
-            padding: 1.75rem;
-        }
+        .dish-content { padding: 1.75rem; }
 
         .dish-type {
             display: inline-flex;
@@ -740,11 +777,7 @@
             margin-bottom: 1rem;
         }
 
-        .dish-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-        }
+        .dish-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 
         .dish-tags span {
             font-size: 0.72rem;
@@ -765,17 +798,14 @@
             font-weight: 700;
         }
 
-        /* ─── Reservations (Contact) ─── */
+        /* ─── Contact ─── */
         #contact {
             background: var(--warm);
             text-align: center;
             border-top: 3px dashed var(--butter);
         }
 
-        .contact-inner {
-            max-width: 550px;
-            margin: 0 auto;
-        }
+        .contact-inner { max-width: 550px; margin: 0 auto; }
 
         .contact-cards {
             display: flex;
@@ -805,9 +835,7 @@
             box-shadow: 4px 4px 0 var(--butter);
         }
 
-        .contact-card .c-icon {
-            font-size: 1.2rem;
-        }
+        .contact-card .c-icon { font-size: 1.2rem; }
 
         /* ─── Footer ─── */
         footer {
@@ -818,13 +846,8 @@
             font-size: 0.85rem;
         }
 
-        footer .heart {
-            color: var(--tomato);
-        }
-
-        footer a {
-            color: var(--butter);
-        }
+        footer .heart { color: var(--tomato); }
+        footer a { color: var(--butter); }
 
         /* ─── Scroll Reveal ─── */
         .reveal {
@@ -833,56 +856,31 @@
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* ─── Fun Hover Wiggle ─── */
         @keyframes wiggle {
             0%, 100% { transform: rotate(0deg); }
             25% { transform: rotate(3deg); }
             75% { transform: rotate(-3deg); }
         }
 
-        .wiggle:hover {
-            animation: wiggle 0.4s ease;
-        }
+        .wiggle:hover { animation: wiggle 0.4s ease; }
 
         /* ─── Responsive ─── */
         @media (max-width: 768px) {
             nav { padding: 1rem 1.5rem; }
 
-            .nav-links {
-                display: none;
-                position: fixed;
-                inset: 0;
-                background: var(--cream);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 2.5rem;
-                font-size: 1.3rem;
-                z-index: 99;
-            }
+            /* Hide desktop links on mobile */
+            nav > ul.nav-links { display: none; }
 
-            .nav-links.open { display: flex; }
-            .hamburger { display: flex; z-index: 101; }
-
-            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-            .hamburger.active span:nth-child(2) { opacity: 0; }
-            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+            .hamburger { display: flex; }
 
             section { padding: 3.5rem 1.5rem; }
             .hero { padding: 6rem 1.5rem 3rem; }
 
             .specials-grid { grid-template-columns: 1fr; }
-
-            .dishes-grid,
-            .menu-grid { grid-template-columns: 1fr; }
-
+            .dishes-grid, .menu-grid { grid-template-columns: 1fr; }
             .chef-card { transform: rotate(0deg); }
-
             .hero-doodle { display: none; }
             .hero-illustration { display: none; }
         }
@@ -901,10 +899,11 @@
     <!-- Navigation -->
     <nav>
         <a href="#" class="nav-logo wiggle">Karan's Kitchen 🍳</a>
-        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
-        <ul class="nav-links" id="navLinks">
+        <!-- Desktop nav -->
+        <ul class="nav-links" id="desktopNav">
             <li><a href="#about">Today's Special</a></li>
             <li><a href="#skills">The Menu</a></li>
             <li><a href="#experience">Kitchen</a></li>
@@ -913,25 +912,31 @@
         </ul>
     </nav>
 
+    <!-- Mobile menu overlay (separate from nav) -->
+    <div class="mobile-menu-overlay" id="mobileMenu" role="dialog" aria-label="Navigation menu">
+        <ul>
+            <li><a href="#about" class="mobile-nav-link">📋 Today's Special</a></li>
+            <li><a href="#skills" class="mobile-nav-link">📜 The Menu</a></li>
+            <li><a href="#experience" class="mobile-nav-link">🏪 Kitchen</a></li>
+            <li><a href="#projects" class="mobile-nav-link">🍽️ Signature Dishes</a></li>
+            <li><a href="#contact" class="mobile-nav-link">📞 Reservations</a></li>
+        </ul>
+    </div>
+
     <!-- Hero -->
     <section class="hero">
         <div class="hero-doodle hero-doodle-1">🍕</div>
         <div class="hero-doodle hero-doodle-2">⚡</div>
         <div class="hero-doodle hero-doodle-3">🔥</div>
 
-        <!-- Developer Illustration -->
         <svg class="hero-illustration" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Desk -->
             <rect x="80" y="340" width="340" height="12" rx="6" fill="#3D2C2C"/>
             <rect x="120" y="352" width="16" height="80" rx="4" fill="#3D2C2C"/>
             <rect x="364" y="352" width="16" height="80" rx="4" fill="#3D2C2C"/>
             <rect x="100" y="428" width="56" height="8" rx="4" fill="#3D2C2C"/>
             <rect x="344" y="428" width="56" height="8" rx="4" fill="#3D2C2C"/>
-            
-            <!-- Monitor -->
             <rect x="140" y="180" width="220" height="150" rx="12" fill="#1A1A1A"/>
             <rect x="150" y="190" width="200" height="120" rx="6" fill="#2D2D3D"/>
-            <!-- Code lines on screen -->
             <rect x="165" y="208" width="80" height="5" rx="2" fill="#E94B3C" opacity="0.9"/>
             <rect x="165" y="220" width="120" height="5" rx="2" fill="#FFD98E" opacity="0.7"/>
             <rect x="180" y="232" width="95" height="5" rx="2" fill="#40916C" opacity="0.8"/>
@@ -940,58 +945,32 @@
             <rect x="180" y="268" width="85" height="5" rx="2" fill="#87CEEB" opacity="0.7"/>
             <rect x="165" y="280" width="60" height="5" rx="2" fill="#40916C" opacity="0.6"/>
             <rect x="165" y="292" width="110" height="5" rx="2" fill="#FFD98E" opacity="0.5"/>
-            <!-- Monitor stand -->
             <rect x="230" y="330" width="40" height="14" rx="3" fill="#1A1A1A"/>
             <rect x="210" y="338" width="80" height="6" rx="3" fill="#1A1A1A"/>
-            
-            <!-- Coffee mug -->
             <rect x="380" y="310" width="30" height="32" rx="6" fill="#E94B3C"/>
             <path d="M410 316C420 316 424 322 424 328C424 334 420 340 410 340" stroke="#E94B3C" stroke-width="4" stroke-linecap="round"/>
-            <!-- Steam -->
-            <path d="M388 304C388 296 394 296 394 288" stroke="#E94B3C" stroke-width="2" stroke-linecap="round" opacity="0.4">
-                <animate attributeName="d" values="M388 304C388 296 394 296 394 288;M388 300C390 292 392 294 394 286;M388 304C388 296 394 296 394 288" dur="2s" repeatCount="indefinite"/>
-            </path>
-            <path d="M398 302C398 294 404 294 404 286" stroke="#E94B3C" stroke-width="2" stroke-linecap="round" opacity="0.3">
-                <animate attributeName="d" values="M398 302C398 294 404 294 404 286;M398 298C400 290 402 292 404 284;M398 302C398 294 404 294 404 286" dur="2.5s" repeatCount="indefinite"/>
-            </path>
-            
-            <!-- Character body -->
-            <!-- Chair -->
+            <path d="M388 304C388 296 394 296 394 288" stroke="#E94B3C" stroke-width="2" stroke-linecap="round" opacity="0.4"><animate attributeName="d" values="M388 304C388 296 394 296 394 288;M388 300C390 292 392 294 394 286;M388 304C388 296 394 296 394 288" dur="2s" repeatCount="indefinite"/></path>
+            <path d="M398 302C398 294 404 294 404 286" stroke="#E94B3C" stroke-width="2" stroke-linecap="round" opacity="0.3"><animate attributeName="d" values="M398 302C398 294 404 294 404 286;M398 298C400 290 402 292 404 284;M398 302C398 294 404 294 404 286" dur="2.5s" repeatCount="indefinite"/></path>
             <rect x="200" y="370" width="100" height="8" rx="4" fill="#6B5E5E"/>
             <rect x="290" y="330" width="10" height="50" rx="4" fill="#6B5E5E"/>
             <path d="M295 330C295 330 310 325 310 340" stroke="#6B5E5E" stroke-width="8" stroke-linecap="round"/>
-            
-            <!-- Body / Torso -->
             <rect x="215" y="270" width="70" height="80" rx="20" fill="#E94B3C"/>
-            <!-- Chef hat / Beanie -->
             <ellipse cx="250" cy="215" rx="35" ry="30" fill="#FFF8F0" stroke="#FFD98E" stroke-width="3"/>
             <rect x="220" y="215" width="60" height="20" rx="8" fill="#FFD98E"/>
-            <!-- Head -->
             <ellipse cx="250" cy="240" rx="28" ry="30" fill="#D4A574"/>
-            <!-- Eyes -->
             <ellipse cx="240" cy="236" rx="4" ry="5" fill="#1A1A1A"/>
             <ellipse cx="260" cy="236" rx="4" ry="5" fill="#1A1A1A"/>
-            <!-- Eye shine -->
             <circle cx="241" cy="234" r="1.5" fill="white"/>
             <circle cx="261" cy="234" r="1.5" fill="white"/>
-            <!-- Smile -->
             <path d="M240 250C240 250 245 257 260 250" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round"/>
-            <!-- Glasses -->
             <circle cx="240" cy="236" r="10" stroke="#3D2C2C" stroke-width="2.5" fill="none"/>
             <circle cx="260" cy="236" r="10" stroke="#3D2C2C" stroke-width="2.5" fill="none"/>
-            <line x1="250" y1="236" x2="250" y2="236" stroke="#3D2C2C" stroke-width="2.5"/>
-            <path d="M250 236L250 236" stroke="#3D2C2C" stroke-width="2.5"/>
             <line x1="230" y1="234" x2="222" y2="232" stroke="#3D2C2C" stroke-width="2"/>
             <line x1="270" y1="234" x2="278" y2="232" stroke="#3D2C2C" stroke-width="2"/>
-            
-            <!-- Arms -->
             <path d="M220 290C200 300 180 310 170 320" stroke="#D4A574" stroke-width="14" stroke-linecap="round"/>
             <path d="M280 290C300 300 320 310 330 300" stroke="#D4A574" stroke-width="14" stroke-linecap="round"/>
-            <!-- Hands on keyboard area -->
             <circle cx="170" cy="324" r="10" fill="#D4A574"/>
             <circle cx="332" cy="300" r="10" fill="#D4A574"/>
-            
-            <!-- Keyboard -->
             <rect x="160" y="328" width="120" height="14" rx="4" fill="#4A4A4A"/>
             <rect x="165" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
             <rect x="176" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
@@ -999,23 +978,10 @@
             <rect x="198" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
             <rect x="209" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
             <rect x="220" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
-            <rect x="231" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
-            <rect x="242" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
-            <rect x="253" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
-            <rect x="264" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
-            
-            <!-- Floating elements around -->
-            <!-- Angular logo hint -->
             <polygon points="90,200 105,160 120,200" fill="#E94B3C" opacity="0.6"/>
             <polygon points="95,195 105,170 115,195" fill="#FFF8F0" opacity="0.4"/>
-            
-            <!-- Curly braces -->
             <text x="370" y="220" font-family="monospace" font-size="36" fill="#FFD98E" opacity="0.5" font-weight="bold">{ }</text>
-            
-            <!-- HTML tag -->
             <text x="95" y="290" font-family="monospace" font-size="20" fill="#40916C" opacity="0.5" font-weight="bold">&lt;/&gt;</text>
-            
-            <!-- Small stars -->
             <text x="380" y="190" font-size="22" opacity="0.6">✨</text>
             <text x="110" y="160" font-size="18" opacity="0.5">💡</text>
             <text x="400" y="270" font-size="18" opacity="0.5">🚀</text>
@@ -1051,7 +1017,6 @@
             <span class="ticker-item"><span class="dot"></span>Fortune 500 Clients</span>
             <span class="ticker-item"><span class="dot"></span>Component Systems</span>
             <span class="ticker-item"><span class="dot"></span>RxJS</span>
-            <!-- Duplicate for seamless loop -->
             <span class="ticker-item"><span class="dot"></span>Angular</span>
             <span class="ticker-item"><span class="dot"></span>TypeScript</span>
             <span class="ticker-item"><span class="dot"></span>Enterprise Scale</span>
@@ -1065,7 +1030,7 @@
         </div>
     </div>
 
-    <!-- About — Today's Special -->
+    <!-- About -->
     <section id="about">
         <div class="section-header reveal">
             <span class="section-icon">📋</span>
@@ -1073,7 +1038,6 @@
             <h2 class="section-title">Meet the Chef</h2>
             <div class="wavy-divider"></div>
         </div>
-
         <div class="specials-grid">
             <div class="specials-text reveal">
                 <p>Every great dish starts with a great chef, and every great interface starts with someone who <strong>obsesses over the details</strong>.</p>
@@ -1088,29 +1052,17 @@
                     <h3>Karan Kumar Gupta</h3>
                     <span class="role">Senior Frontend Chef</span>
                     <div class="chef-stats">
-                        <div class="chef-stat">
-                            <div class="num">6+</div>
-                            <div class="label">Years Cooking</div>
-                        </div>
-                        <div class="chef-stat">
-                            <div class="num">$500B+</div>
-                            <div class="label">Assets Served</div>
-                        </div>
-                        <div class="chef-stat">
-                            <div class="num">15+</div>
-                            <div class="label">Team Size</div>
-                        </div>
-                        <div class="chef-stat">
-                            <div class="num">EN-JP</div>
-                            <div class="label">Bilingual UI</div>
-                        </div>
+                        <div class="chef-stat"><div class="num">6+</div><div class="label">Years Cooking</div></div>
+                        <div class="chef-stat"><div class="num">$500B+</div><div class="label">Assets Served</div></div>
+                        <div class="chef-stat"><div class="num">15+</div><div class="label">Team Size</div></div>
+                        <div class="chef-stat"><div class="num">EN-JP</div><div class="label">Bilingual UI</div></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills — The Menu -->
+    <!-- Skills -->
     <section id="skills">
         <div class="section-header reveal">
             <span class="section-icon">📜</span>
@@ -1119,89 +1071,62 @@
             <p class="section-subtitle">Each dish is crafted from the finest ingredients</p>
             <div class="wavy-divider"></div>
         </div>
-
         <div class="menu-grid">
             <div class="menu-card reveal" data-price="⭐⭐⭐">
                 <div class="card-icon">🍝</div>
                 <h3>The Angular Carbonara</h3>
                 <p class="card-desc">Rich, complex, and deeply satisfying</p>
                 <div class="ingredients">
-                    <span class="ingredient">Angular</span>
-                    <span class="ingredient">TypeScript</span>
-                    <span class="ingredient">RxJS</span>
-                    <span class="ingredient">NgRx</span>
-                    <span class="ingredient">Angular CLI</span>
+                    <span class="ingredient">Angular</span><span class="ingredient">TypeScript</span><span class="ingredient">RxJS</span><span class="ingredient">NgRx</span><span class="ingredient">Angular CLI</span>
                 </div>
             </div>
-
             <div class="menu-card reveal" data-price="⭐⭐⭐">
                 <div class="card-icon">🥗</div>
                 <h3>Data Grid Salad</h3>
                 <p class="card-desc">Crisp, fresh, handles anything you throw at it</p>
                 <div class="ingredients">
-                    <span class="ingredient">AG Grid</span>
-                    <span class="ingredient">Excel Export</span>
-                    <span class="ingredient">Dynamic Tables</span>
-                    <span class="ingredient">Virtual Scroll</span>
+                    <span class="ingredient">AG Grid</span><span class="ingredient">Excel Export</span><span class="ingredient">Dynamic Tables</span><span class="ingredient">Virtual Scroll</span>
                 </div>
             </div>
-
             <div class="menu-card reveal" data-price="⭐⭐⭐">
                 <div class="card-icon">🍱</div>
                 <h3>The Accessibility Bento</h3>
                 <p class="card-desc">Carefully arranged so everyone can enjoy</p>
                 <div class="ingredients">
-                    <span class="ingredient">WCAG 2.1</span>
-                    <span class="ingredient">ARIA</span>
-                    <span class="ingredient">Screen Readers</span>
-                    <span class="ingredient">Keyboard Nav</span>
+                    <span class="ingredient">WCAG 2.1</span><span class="ingredient">ARIA</span><span class="ingredient">Screen Readers</span><span class="ingredient">Keyboard Nav</span>
                 </div>
             </div>
-
             <div class="menu-card reveal" data-price="⭐⭐">
                 <div class="card-icon">🍣</div>
                 <h3>i18n Omakase</h3>
                 <p class="card-desc">A multi-course journey across languages</p>
                 <div class="ingredients">
-                    <span class="ingredient">i18n</span>
-                    <span class="ingredient">L10n</span>
-                    <span class="ingredient">EN-JP</span>
-                    <span class="ingredient">RTL Support</span>
+                    <span class="ingredient">i18n</span><span class="ingredient">L10n</span><span class="ingredient">EN-JP</span><span class="ingredient">RTL Support</span>
                 </div>
             </div>
-
             <div class="menu-card reveal" data-price="⭐⭐">
                 <div class="card-icon">🍰</div>
                 <h3>Component Soufflé</h3>
                 <p class="card-desc">Light, elegant, rises to every occasion</p>
                 <div class="ingredients">
-                    <span class="ingredient">Design Systems</span>
-                    <span class="ingredient">Reusable Components</span>
-                    <span class="ingredient">SCSS</span>
-                    <span class="ingredient">Storybook</span>
+                    <span class="ingredient">Design Systems</span><span class="ingredient">Reusable Components</span><span class="ingredient">SCSS</span><span class="ingredient">Storybook</span>
                 </div>
             </div>
-
             <div class="menu-card reveal" data-price="🌶️">
                 <div class="card-icon">🌶️</div>
                 <h3>Spicy New Flavors</h3>
                 <p class="card-desc">Currently experimenting in the test kitchen</p>
                 <div class="ingredients">
-                    <span class="ingredient">React</span>
-                    <span class="ingredient">Next.js</span>
-                    <span class="ingredient">System Design</span>
-                    <span class="ingredient">DSA</span>
-                    <span class="ingredient">Node.js</span>
+                    <span class="ingredient">React</span><span class="ingredient">Next.js</span><span class="ingredient">System Design</span><span class="ingredient">DSA</span><span class="ingredient">Node.js</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience — Kitchen -->
+    <!-- Experience -->
     <section id="experience">
         <div class="exp-bg-emoji">🍳</div>
         <div class="exp-bg-emoji">🔪</div>
-
         <div class="section-header reveal">
             <span class="section-icon">🏪</span>
             <span class="section-tag">Kitchen Experience</span>
@@ -1209,7 +1134,6 @@
             <p class="section-subtitle">From prep cook to head chef</p>
             <div class="wavy-divider"></div>
         </div>
-
         <div class="kitchen-timeline">
             <div class="kitchen-item reveal" data-emoji="👨‍🍳">
                 <p class="kitchen-date">June 2022 — Present</p>
@@ -1224,7 +1148,6 @@
                     <li>Advanced AG Grid with dynamic mapping, Excel export, and preference management</li>
                 </ul>
             </div>
-
             <div class="kitchen-item reveal" data-emoji="🧑‍🍳">
                 <p class="kitchen-date">June 2019 — June 2022</p>
                 <h3 class="kitchen-role">Sous Chef</h3>
@@ -1238,7 +1161,7 @@
         </div>
     </section>
 
-    <!-- Projects — Signature Dishes -->
+    <!-- Projects -->
     <section id="projects">
         <div class="section-header reveal">
             <span class="section-icon">🍽️</span>
@@ -1247,7 +1170,6 @@
             <p class="section-subtitle">The dishes that keep clients coming back</p>
             <div class="wavy-divider"></div>
         </div>
-
         <div class="dishes-grid">
             <div class="dish-card reveal">
                 <div class="dish-banner"></div>
@@ -1256,15 +1178,9 @@
                     <div class="dish-rating">★ 5.0</div>
                     <h3>Questionnaire Builder Engine</h3>
                     <p>A dynamic, configurable system for institutional investor due diligence — supporting complex logic, conditional rendering, and multi-format exports.</p>
-                    <div class="dish-tags">
-                        <span>Angular</span>
-                        <span>TypeScript</span>
-                        <span>RxJS</span>
-                        <span>Dynamic Forms</span>
-                    </div>
+                    <div class="dish-tags"><span>Angular</span><span>TypeScript</span><span>RxJS</span><span>Dynamic Forms</span></div>
                 </div>
             </div>
-
             <div class="dish-card reveal">
                 <div class="dish-banner"></div>
                 <div class="dish-content">
@@ -1272,15 +1188,9 @@
                     <div class="dish-rating">★ 5.0</div>
                     <h3>Advanced Data Grid System</h3>
                     <p>High-performance AG Grid with complex interdependencies, preference management, dynamic columns, and Excel export with custom formatting.</p>
-                    <div class="dish-tags">
-                        <span>AG Grid</span>
-                        <span>TypeScript</span>
-                        <span>Excel</span>
-                        <span>State Mgmt</span>
-                    </div>
+                    <div class="dish-tags"><span>AG Grid</span><span>TypeScript</span><span>Excel</span><span>State Mgmt</span></div>
                 </div>
             </div>
-
             <div class="dish-card reveal">
                 <div class="dish-banner"></div>
                 <div class="dish-content">
@@ -1288,15 +1198,9 @@
                     <div class="dish-rating">★ 4.9</div>
                     <h3>WCAG Compliance Framework</h3>
                     <p>Led accessibility across enterprise modules — ARIA patterns, keyboard navigation, screen reader support, and full WCAG 2.1 AA compliance.</p>
-                    <div class="dish-tags">
-                        <span>WCAG 2.1</span>
-                        <span>ARIA</span>
-                        <span>Axe</span>
-                        <span>Angular</span>
-                    </div>
+                    <div class="dish-tags"><span>WCAG 2.1</span><span>ARIA</span><span>Axe</span><span>Angular</span></div>
                 </div>
             </div>
-
             <div class="dish-card reveal">
                 <div class="dish-banner"></div>
                 <div class="dish-content">
@@ -1304,15 +1208,9 @@
                     <div class="dish-rating">★ 4.9</div>
                     <h3>Internationalization System</h3>
                     <p>Full English-Japanese localization enabling global reach with locale-specific formatting and comprehensive translation pipelines.</p>
-                    <div class="dish-tags">
-                        <span>i18n</span>
-                        <span>L10n</span>
-                        <span>Angular i18n</span>
-                        <span>Pipelines</span>
-                    </div>
+                    <div class="dish-tags"><span>i18n</span><span>L10n</span><span>Angular i18n</span><span>Pipelines</span></div>
                 </div>
             </div>
-
             <div class="dish-card reveal">
                 <div class="dish-banner"></div>
                 <div class="dish-content">
@@ -1320,15 +1218,9 @@
                     <div class="dish-rating">★ 4.8</div>
                     <h3>Workflow Automation Engine</h3>
                     <p>Custom rule-based triggers, approval chains, and notification flows for streamlining due diligence operations at enterprise scale.</p>
-                    <div class="dish-tags">
-                        <span>Angular</span>
-                        <span>RxJS</span>
-                        <span>State Machines</span>
-                        <span>APIs</span>
-                    </div>
+                    <div class="dish-tags"><span>Angular</span><span>RxJS</span><span>State Machines</span><span>APIs</span></div>
                 </div>
             </div>
-
             <div class="dish-card reveal">
                 <div class="dish-banner"></div>
                 <div class="dish-content">
@@ -1336,18 +1228,13 @@
                     <div class="dish-rating">★ 4.8</div>
                     <h3>Design System Library</h3>
                     <p>Reusable, accessible component library with comprehensive documentation — adopted as the engineering team's standard toolkit.</p>
-                    <div class="dish-tags">
-                        <span>Angular</span>
-                        <span>SCSS</span>
-                        <span>Storybook</span>
-                        <span>Docs</span>
-                    </div>
+                    <div class="dish-tags"><span>Angular</span><span>SCSS</span><span>Storybook</span><span>Docs</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact — Reservations -->
+    <!-- Contact -->
     <section id="contact">
         <div class="contact-inner reveal">
             <span class="section-icon">📞</span>
@@ -1355,17 +1242,10 @@
             <h2 class="section-title">Book a Table</h2>
             <p class="section-subtitle">Open for collaborations, interesting projects, and good conversations about frontend engineering.</p>
             <div class="wavy-divider"></div>
-
             <div class="contact-cards">
-                <a href="mailto:your.email@example.com" class="contact-card wiggle">
-                    <span class="c-icon">📧</span> Email Me
-                </a>
-                <a href="https://github.com/karankumar6898" target="_blank" rel="noopener" class="contact-card wiggle">
-                    <span class="c-icon">🐙</span> GitHub
-                </a>
-                <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" class="contact-card wiggle">
-                    <span class="c-icon">💼</span> LinkedIn
-                </a>
+                <a href="mailto:your.email@example.com" class="contact-card wiggle"><span class="c-icon">📧</span> Email Me</a>
+                <a href="https://github.com/karankumar6898" target="_blank" rel="noopener" class="contact-card wiggle"><span class="c-icon">🐙</span> GitHub</a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" class="contact-card wiggle"><span class="c-icon">💼</span> LinkedIn</a>
             </div>
         </div>
     </section>
@@ -1376,32 +1256,52 @@
     </footer>
 
     <script>
-        // Scroll Reveal
+        // ── Scroll Reveal ──
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Mobile Nav
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('navLinks');
+        // ── Mobile Nav ──
+        const hamburger   = document.getElementById('hamburger');
+        const mobileMenu  = document.getElementById('mobileMenu');
+
+        function openMenu() {
+            mobileMenu.classList.add('open');
+            hamburger.classList.add('active');
+            hamburger.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden'; // prevent background scroll
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.remove('open');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
 
         hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('open');
+            mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
         });
 
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('open');
-            });
+        // Close when a nav link is tapped
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', closeMenu);
         });
 
-        // Smooth Scroll
+        // Close when clicking the overlay background
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) closeMenu();
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMenu();
+        });
+
+        // ── Smooth Scroll ──
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
