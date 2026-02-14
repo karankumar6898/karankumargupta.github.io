@@ -144,13 +144,22 @@
 
         .hero-doodle {
             position: absolute;
-            opacity: 0.07;
             pointer-events: none;
         }
 
-        .hero-doodle-1 { top: 10%; right: 5%; font-size: 15rem; transform: rotate(15deg); animation: floatSlow 8s ease-in-out infinite; }
-        .hero-doodle-2 { bottom: 10%; left: 3%; font-size: 10rem; transform: rotate(-10deg); animation: floatSlow 6s ease-in-out infinite 1s; }
-        .hero-doodle-3 { top: 25%; left: 40%; font-size: 8rem; animation: floatSlow 7s ease-in-out infinite 2s; }
+        .hero-doodle-1 { top: 12%; right: 8%; font-size: 8rem; opacity: 0.25; transform: rotate(15deg); animation: floatSlow 8s ease-in-out infinite; }
+        .hero-doodle-2 { bottom: 8%; right: 12%; font-size: 6rem; opacity: 0.25; transform: rotate(-10deg); animation: floatSlow 6s ease-in-out infinite 1s; }
+        .hero-doodle-3 { top: 18%; right: 32%; font-size: 5rem; opacity: 0.3; animation: floatSlow 7s ease-in-out infinite 2s; }
+
+        .hero-illustration {
+            position: absolute;
+            right: 6%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 380px;
+            pointer-events: none;
+            animation: floatSlow 5s ease-in-out infinite;
+        }
 
         @keyframes floatSlow {
             0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
@@ -582,8 +591,8 @@
 
         .exp-bg-emoji {
             position: absolute;
-            font-size: 12rem;
-            opacity: 0.03;
+            font-size: 14rem;
+            opacity: 0.15;
             pointer-events: none;
         }
 
@@ -875,6 +884,7 @@
             .chef-card { transform: rotate(0deg); }
 
             .hero-doodle { display: none; }
+            .hero-illustration { display: none; }
         }
 
         @media (max-width: 480px) {
@@ -905,9 +915,111 @@
 
     <!-- Hero -->
     <section class="hero">
-        <div class="hero-doodle hero-doodle-1" style="--rot: 15deg;">🍕</div>
-        <div class="hero-doodle hero-doodle-2" style="--rot: -10deg;">🧑‍💻</div>
-        <div class="hero-doodle hero-doodle-3" style="--rot: 5deg;">⚡</div>
+        <div class="hero-doodle hero-doodle-1">🍕</div>
+        <div class="hero-doodle hero-doodle-2">⚡</div>
+        <div class="hero-doodle hero-doodle-3">🔥</div>
+
+        <!-- Developer Illustration -->
+        <svg class="hero-illustration" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Desk -->
+            <rect x="80" y="340" width="340" height="12" rx="6" fill="#3D2C2C"/>
+            <rect x="120" y="352" width="16" height="80" rx="4" fill="#3D2C2C"/>
+            <rect x="364" y="352" width="16" height="80" rx="4" fill="#3D2C2C"/>
+            <rect x="100" y="428" width="56" height="8" rx="4" fill="#3D2C2C"/>
+            <rect x="344" y="428" width="56" height="8" rx="4" fill="#3D2C2C"/>
+            
+            <!-- Monitor -->
+            <rect x="140" y="180" width="220" height="150" rx="12" fill="#1A1A1A"/>
+            <rect x="150" y="190" width="200" height="120" rx="6" fill="#2D2D3D"/>
+            <!-- Code lines on screen -->
+            <rect x="165" y="208" width="80" height="5" rx="2" fill="#E94B3C" opacity="0.9"/>
+            <rect x="165" y="220" width="120" height="5" rx="2" fill="#FFD98E" opacity="0.7"/>
+            <rect x="180" y="232" width="95" height="5" rx="2" fill="#40916C" opacity="0.8"/>
+            <rect x="180" y="244" width="70" height="5" rx="2" fill="#FFD98E" opacity="0.6"/>
+            <rect x="165" y="256" width="100" height="5" rx="2" fill="#E94B3C" opacity="0.7"/>
+            <rect x="180" y="268" width="85" height="5" rx="2" fill="#87CEEB" opacity="0.7"/>
+            <rect x="165" y="280" width="60" height="5" rx="2" fill="#40916C" opacity="0.6"/>
+            <rect x="165" y="292" width="110" height="5" rx="2" fill="#FFD98E" opacity="0.5"/>
+            <!-- Monitor stand -->
+            <rect x="230" y="330" width="40" height="14" rx="3" fill="#1A1A1A"/>
+            <rect x="210" y="338" width="80" height="6" rx="3" fill="#1A1A1A"/>
+            
+            <!-- Coffee mug -->
+            <rect x="380" y="310" width="30" height="32" rx="6" fill="#E94B3C"/>
+            <path d="M410 316C420 316 424 322 424 328C424 334 420 340 410 340" stroke="#E94B3C" stroke-width="4" stroke-linecap="round"/>
+            <!-- Steam -->
+            <path d="M388 304C388 296 394 296 394 288" stroke="#E94B3C" stroke-width="2" stroke-linecap="round" opacity="0.4">
+                <animate attributeName="d" values="M388 304C388 296 394 296 394 288;M388 300C390 292 392 294 394 286;M388 304C388 296 394 296 394 288" dur="2s" repeatCount="indefinite"/>
+            </path>
+            <path d="M398 302C398 294 404 294 404 286" stroke="#E94B3C" stroke-width="2" stroke-linecap="round" opacity="0.3">
+                <animate attributeName="d" values="M398 302C398 294 404 294 404 286;M398 298C400 290 402 292 404 284;M398 302C398 294 404 294 404 286" dur="2.5s" repeatCount="indefinite"/>
+            </path>
+            
+            <!-- Character body -->
+            <!-- Chair -->
+            <rect x="200" y="370" width="100" height="8" rx="4" fill="#6B5E5E"/>
+            <rect x="290" y="330" width="10" height="50" rx="4" fill="#6B5E5E"/>
+            <path d="M295 330C295 330 310 325 310 340" stroke="#6B5E5E" stroke-width="8" stroke-linecap="round"/>
+            
+            <!-- Body / Torso -->
+            <rect x="215" y="270" width="70" height="80" rx="20" fill="#E94B3C"/>
+            <!-- Chef hat / Beanie -->
+            <ellipse cx="250" cy="215" rx="35" ry="30" fill="#FFF8F0" stroke="#FFD98E" stroke-width="3"/>
+            <rect x="220" y="215" width="60" height="20" rx="8" fill="#FFD98E"/>
+            <!-- Head -->
+            <ellipse cx="250" cy="240" rx="28" ry="30" fill="#D4A574"/>
+            <!-- Eyes -->
+            <ellipse cx="240" cy="236" rx="4" ry="5" fill="#1A1A1A"/>
+            <ellipse cx="260" cy="236" rx="4" ry="5" fill="#1A1A1A"/>
+            <!-- Eye shine -->
+            <circle cx="241" cy="234" r="1.5" fill="white"/>
+            <circle cx="261" cy="234" r="1.5" fill="white"/>
+            <!-- Smile -->
+            <path d="M240 250C240 250 245 257 260 250" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Glasses -->
+            <circle cx="240" cy="236" r="10" stroke="#3D2C2C" stroke-width="2.5" fill="none"/>
+            <circle cx="260" cy="236" r="10" stroke="#3D2C2C" stroke-width="2.5" fill="none"/>
+            <line x1="250" y1="236" x2="250" y2="236" stroke="#3D2C2C" stroke-width="2.5"/>
+            <path d="M250 236L250 236" stroke="#3D2C2C" stroke-width="2.5"/>
+            <line x1="230" y1="234" x2="222" y2="232" stroke="#3D2C2C" stroke-width="2"/>
+            <line x1="270" y1="234" x2="278" y2="232" stroke="#3D2C2C" stroke-width="2"/>
+            
+            <!-- Arms -->
+            <path d="M220 290C200 300 180 310 170 320" stroke="#D4A574" stroke-width="14" stroke-linecap="round"/>
+            <path d="M280 290C300 300 320 310 330 300" stroke="#D4A574" stroke-width="14" stroke-linecap="round"/>
+            <!-- Hands on keyboard area -->
+            <circle cx="170" cy="324" r="10" fill="#D4A574"/>
+            <circle cx="332" cy="300" r="10" fill="#D4A574"/>
+            
+            <!-- Keyboard -->
+            <rect x="160" y="328" width="120" height="14" rx="4" fill="#4A4A4A"/>
+            <rect x="165" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
+            <rect x="176" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
+            <rect x="187" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
+            <rect x="198" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
+            <rect x="209" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
+            <rect x="220" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
+            <rect x="231" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
+            <rect x="242" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
+            <rect x="253" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
+            <rect x="264" y="330" width="8" height="4" rx="1" fill="#6B6B6B"/>
+            
+            <!-- Floating elements around -->
+            <!-- Angular logo hint -->
+            <polygon points="90,200 105,160 120,200" fill="#E94B3C" opacity="0.6"/>
+            <polygon points="95,195 105,170 115,195" fill="#FFF8F0" opacity="0.4"/>
+            
+            <!-- Curly braces -->
+            <text x="370" y="220" font-family="monospace" font-size="36" fill="#FFD98E" opacity="0.5" font-weight="bold">{ }</text>
+            
+            <!-- HTML tag -->
+            <text x="95" y="290" font-family="monospace" font-size="20" fill="#40916C" opacity="0.5" font-weight="bold">&lt;/&gt;</text>
+            
+            <!-- Small stars -->
+            <text x="380" y="190" font-size="22" opacity="0.6">✨</text>
+            <text x="110" y="160" font-size="18" opacity="0.5">💡</text>
+            <text x="400" y="270" font-size="18" opacity="0.5">🚀</text>
+        </svg>
 
         <div class="hero-content">
             <div class="hero-stamp">👨‍🍳 Now Serving Fresh Code Daily</div>
