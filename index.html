@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karan Kumar Gupta — Frontend Chef 👨‍🍳</title>
+    <meta name="description" content="Senior Frontend Engineer who cooks up enterprise-grade digital experiences.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Caveat:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FFF8F0;
+            --warm: #FEF0E1;
+            --butter: #FFD98E;
+            --tomato: #E94B3C;
+            --tomato-light: #FF6B5B;
+            --herb: #2D6A4F;
+            --herb-light: #40916C;
+            --charcoal: #1A1A1A;
+            --espresso: #3D2C2C;
+            --smoke: #6B5E5E;
+            --flour: #F5EDE3;
+            --display: 'Playfair Display', Georgia, serif;
+            --hand: 'Caveat', cursive;
+            --body: 'Outfit', sans-serif;
+        }
+
+        *, *::before, *::after {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--body);
+            background: var(--cream);
+            color: var(--charcoal);
+            overflow-x: hidden;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ctext y='18' font-size='18'%3E🍴%3C/text%3E%3C/svg%3E") 12 12, auto;
+        }
+
+        ::selection {
+            background: var(--tomato);
+            color: white;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        /* ─── Paper Texture Overlay ─── */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 10000;
+        }
+
+        /* ─── Navigation ─── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 248, 240, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 2px dashed var(--butter);
+        }
+
+        .nav-logo {
+            font-family: var(--hand);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--tomato);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--body);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--espresso);
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '~';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            color: var(--tomato);
+            font-family: var(--hand);
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--tomato);
+        }
+
+        .nav-links a:hover::after {
+            transform: translateX(-50%) scale(1);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--espresso);
+            transition: all 0.3s;
+        }
+
+        /* ─── Hero ─── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 6rem 2.5rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-doodle {
+            position: absolute;
+            opacity: 0.07;
+            pointer-events: none;
+        }
+
+        .hero-doodle-1 { top: 10%; right: 5%; font-size: 15rem; transform: rotate(15deg); animation: floatSlow 8s ease-in-out infinite; }
+        .hero-doodle-2 { bottom: 10%; left: 3%; font-size: 10rem; transform: rotate(-10deg); animation: floatSlow 6s ease-in-out infinite 1s; }
+        .hero-doodle-3 { top: 25%; left: 40%; font-size: 8rem; animation: floatSlow 7s ease-in-out infinite 2s; }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+            50% { transform: translateY(-20px) rotate(var(--rot, 0deg)); }
+        }
+
+        .hero-content {
+            max-width: 750px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-stamp {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--tomato);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 100px;
+            font-family: var(--hand);
+            font-size: 1.1rem;
+            font-weight: 600;
+            transform: rotate(-2deg);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: popIn 0.5s ease forwards 0.3s;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: rotate(-2deg) scale(0.8); }
+            to { opacity: 1; transform: rotate(-2deg) scale(1); }
+        }
+
+        .hero-title {
+            font-family: var(--display);
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            color: var(--charcoal);
+            opacity: 0;
+            animation: slideUp 0.7s ease forwards 0.5s;
+        }
+
+        .hero-title .highlight {
+            position: relative;
+            display: inline-block;
+            color: var(--tomato);
+        }
+
+        .hero-title .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: -4px;
+            right: -4px;
+            height: 12px;
+            background: var(--butter);
+            z-index: -1;
+            transform: rotate(-1deg);
+        }
+
+        .hero-title .underline-sketch {
+            position: relative;
+        }
+
+        .hero-title .underline-sketch::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: url("data:image/svg+xml,%3Csvg width='200' height='8' viewBox='0 0 200 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 5.5C30 2 60 7 100 3.5C140 0 170 6 199 3' stroke='%23E94B3C' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x;
+            background-size: 200px 8px;
+        }
+
+        .hero-desc {
+            margin-top: 1.5rem;
+            font-size: 1.15rem;
+            color: var(--smoke);
+            line-height: 1.8;
+            max-width: 520px;
+            opacity: 0;
+            animation: slideUp 0.7s ease forwards 0.7s;
+        }
+
+        .hero-desc strong {
+            color: var(--espresso);
+            font-weight: 600;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: slideUp 0.7s ease forwards 0.9s;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2rem;
+            border-radius: 100px;
+            font-family: var(--body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .btn-hot {
+            background: var(--tomato);
+            color: white;
+            border-color: var(--tomato);
+        }
+
+        .btn-hot:hover {
+            background: var(--tomato-light);
+            border-color: var(--tomato-light);
+            transform: translateY(-3px) rotate(-1deg);
+            box-shadow: 0 10px 30px rgba(233, 75, 60, 0.3);
+        }
+
+        .btn-mild {
+            background: transparent;
+            color: var(--espresso);
+            border-color: var(--espresso);
+        }
+
+        .btn-mild:hover {
+            background: var(--espresso);
+            color: var(--cream);
+            transform: translateY(-3px) rotate(1deg);
+        }
+
+        /* ─── Ticker Strip ─── */
+        .ticker {
+            background: var(--charcoal);
+            color: var(--butter);
+            padding: 0.8rem 0;
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 3px solid var(--tomato);
+            border-bottom: 3px solid var(--tomato);
+        }
+
+        .ticker-track {
+            display: inline-flex;
+            animation: scroll 25s linear infinite;
+        }
+
+        .ticker-item {
+            font-family: var(--hand);
+            font-size: 1.3rem;
+            padding: 0 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .ticker-item .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--tomato);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* ─── Section Styling ─── */
+        section {
+            padding: 5rem 2.5rem;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .section-tag {
+            font-family: var(--hand);
+            font-size: 1.3rem;
+            color: var(--tomato);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .section-title {
+            font-family: var(--display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            color: var(--charcoal);
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--smoke);
+            margin-top: 0.5rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .wavy-divider {
+            width: 80px;
+            height: 8px;
+            margin: 1rem auto 0;
+            background: url("data:image/svg+xml,%3Csvg width='80' height='8' viewBox='0 0 80 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4C10 1 15 7 25 4C35 1 40 7 50 4C60 1 65 7 79 4' stroke='%23E94B3C' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
+        }
+
+        /* ─── Today's Specials (About) ─── */
+        #about {
+            background: var(--warm);
+            border-top: 3px dashed var(--butter);
+            border-bottom: 3px dashed var(--butter);
+        }
+
+        .specials-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .specials-text p {
+            font-size: 1.05rem;
+            color: var(--smoke);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .specials-text p strong {
+            color: var(--espresso);
+        }
+
+        .chef-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 2px solid var(--butter);
+            position: relative;
+            transform: rotate(1deg);
+            box-shadow: 8px 8px 0 var(--butter);
+            transition: transform 0.3s;
+        }
+
+        .chef-card:hover {
+            transform: rotate(0deg);
+        }
+
+        .chef-card-pin {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            background: var(--tomato);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .chef-emoji {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .chef-card h3 {
+            font-family: var(--display);
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 0.25rem;
+        }
+
+        .chef-card .role {
+            font-family: var(--hand);
+            font-size: 1.2rem;
+            color: var(--tomato);
+            text-align: center;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .chef-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .chef-stat {
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--flour);
+            border-radius: 12px;
+        }
+
+        .chef-stat .num {
+            font-family: var(--display);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--herb);
+        }
+
+        .chef-stat .label {
+            font-size: 0.72rem;
+            color: var(--smoke);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.15rem;
+        }
+
+        /* ─── The Menu (Skills) ─── */
+        #skills {
+            background: var(--cream);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .menu-card {
+            background: white;
+            border: 2px solid var(--flour);
+            border-radius: 16px;
+            padding: 1.75rem;
+            position: relative;
+            transition: all 0.35s;
+        }
+
+        .menu-card::before {
+            content: attr(data-price);
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-family: var(--hand);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--herb);
+        }
+
+        .menu-card:hover {
+            border-color: var(--tomato);
+            transform: translateY(-5px) rotate(-0.5deg);
+            box-shadow: 6px 6px 0 var(--butter);
+        }
+
+        .menu-card .card-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .menu-card h3 {
+            font-family: var(--display);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .menu-card .card-desc {
+            font-family: var(--hand);
+            font-size: 1rem;
+            color: var(--smoke);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .ingredients {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .ingredient {
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.3rem 0.75rem;
+            border-radius: 100px;
+            background: var(--flour);
+            color: var(--espresso);
+            border: 1px solid var(--butter);
+            transition: all 0.2s;
+        }
+
+        .ingredient:hover {
+            background: var(--butter);
+            transform: scale(1.05);
+        }
+
+        /* ─── Kitchen Experience (Timeline) ─── */
+        #experience {
+            background: var(--charcoal);
+            color: var(--cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #experience .section-tag { color: var(--butter); }
+        #experience .section-title { color: var(--cream); }
+        #experience .section-subtitle { color: rgba(255,248,240,0.5); }
+
+        .exp-bg-emoji {
+            position: absolute;
+            font-size: 12rem;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .exp-bg-emoji:nth-child(1) { top: 5%; right: 5%; }
+        .exp-bg-emoji:nth-child(2) { bottom: 10%; left: 5%; }
+
+        .kitchen-timeline {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .kitchen-timeline::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: repeating-linear-gradient(
+                to bottom,
+                var(--butter) 0px,
+                var(--butter) 8px,
+                transparent 8px,
+                transparent 16px
+            );
+        }
+
+        .kitchen-item {
+            padding-left: 3.5rem;
+            padding-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .kitchen-item::before {
+            content: attr(data-emoji);
+            position: absolute;
+            left: 6px;
+            top: 0;
+            font-size: 1.8rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .kitchen-item:last-child { padding-bottom: 0; }
+
+        .kitchen-date {
+            font-family: var(--hand);
+            font-size: 1.1rem;
+            color: var(--butter);
+            margin-bottom: 0.25rem;
+        }
+
+        .kitchen-role {
+            font-family: var(--display);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .kitchen-place {
+            font-size: 0.9rem;
+            color: rgba(255,248,240,0.5);
+            margin-bottom: 0.75rem;
+        }
+
+        .kitchen-tasks {
+            list-style: none;
+        }
+
+        .kitchen-tasks li {
+            font-size: 0.92rem;
+            color: rgba(255,248,240,0.7);
+            line-height: 1.7;
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.3rem;
+        }
+
+        .kitchen-tasks li::before {
+            content: '🔥';
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
+        /* ─── Signature Dishes (Projects) ─── */
+        #projects {
+            background: var(--cream);
+        }
+
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.75rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .dish-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid var(--flour);
+            transition: all 0.35s;
+            position: relative;
+        }
+
+        .dish-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(61, 44, 44, 0.1);
+            border-color: var(--butter);
+        }
+
+        .dish-banner {
+            height: 8px;
+            background: linear-gradient(90deg, var(--tomato), var(--butter), var(--herb));
+        }
+
+        .dish-content {
+            padding: 1.75rem;
+        }
+
+        .dish-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: var(--hand);
+            font-size: 1rem;
+            color: var(--herb);
+            margin-bottom: 0.5rem;
+        }
+
+        .dish-card h3 {
+            font-family: var(--display);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .dish-card p {
+            font-size: 0.9rem;
+            color: var(--smoke);
+            line-height: 1.65;
+            margin-bottom: 1rem;
+        }
+
+        .dish-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .dish-tags span {
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            border-radius: 8px;
+            background: var(--flour);
+            color: var(--espresso);
+        }
+
+        .dish-rating {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            font-family: var(--hand);
+            font-size: 1.1rem;
+            color: var(--tomato);
+            font-weight: 700;
+        }
+
+        /* ─── Reservations (Contact) ─── */
+        #contact {
+            background: var(--warm);
+            text-align: center;
+            border-top: 3px dashed var(--butter);
+        }
+
+        .contact-inner {
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .contact-cards {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.9rem 1.5rem;
+            border-radius: 100px;
+            background: white;
+            border: 2px solid var(--flour);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--espresso);
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--tomato);
+            transform: translateY(-3px) rotate(-1deg);
+            box-shadow: 4px 4px 0 var(--butter);
+        }
+
+        .contact-card .c-icon {
+            font-size: 1.2rem;
+        }
+
+        /* ─── Footer ─── */
+        footer {
+            background: var(--charcoal);
+            color: rgba(255,248,240,0.4);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+        }
+
+        footer .heart {
+            color: var(--tomato);
+        }
+
+        footer a {
+            color: var(--butter);
+        }
+
+        /* ─── Scroll Reveal ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── Fun Hover Wiggle ─── */
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(3deg); }
+            75% { transform: rotate(-3deg); }
+        }
+
+        .wiggle:hover {
+            animation: wiggle 0.4s ease;
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: var(--cream);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2.5rem;
+                font-size: 1.3rem;
+                z-index: 99;
+            }
+
+            .nav-links.open { display: flex; }
+            .hamburger { display: flex; z-index: 101; }
+
+            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+            section { padding: 3.5rem 1.5rem; }
+            .hero { padding: 6rem 1.5rem 3rem; }
+
+            .specials-grid { grid-template-columns: 1fr; }
+
+            .dishes-grid,
+            .menu-grid { grid-template-columns: 1fr; }
+
+            .chef-card { transform: rotate(0deg); }
+
+            .hero-doodle { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-cta { flex-direction: column; }
+            .btn { justify-content: center; }
+            .contact-cards { flex-direction: column; align-items: center; }
+            .chef-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="nav-logo wiggle">Karan's Kitchen 🍳</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">Today's Special</a></li>
+            <li><a href="#skills">The Menu</a></li>
+            <li><a href="#experience">Kitchen</a></li>
+            <li><a href="#projects">Signature Dishes</a></li>
+            <li><a href="#contact">Reservations</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-doodle hero-doodle-1" style="--rot: 15deg;">🍕</div>
+        <div class="hero-doodle hero-doodle-2" style="--rot: -10deg;">🧑‍💻</div>
+        <div class="hero-doodle hero-doodle-3" style="--rot: 5deg;">⚡</div>
+
+        <div class="hero-content">
+            <div class="hero-stamp">👨‍🍳 Now Serving Fresh Code Daily</div>
+            <h1 class="hero-title">
+                I cook up<br>
+                <span class="highlight">pixel-perfect</span><br>
+                <span class="underline-sketch">digital experiences</span>
+            </h1>
+            <p class="hero-desc">
+                Welcome to my kitchen! I'm <strong>Karan Kumar Gupta</strong> — a Senior Frontend Engineer who serves <strong>enterprise-grade Angular applications</strong> to Fortune 500 clients. Every dish is crafted with care, seasoned with accessibility, and plated with precision.
+            </p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-hot">🍽️ Make a Reservation</a>
+                <a href="#projects" class="btn btn-mild">📖 See the Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ticker -->
+    <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+            <span class="ticker-item"><span class="dot"></span>Angular</span>
+            <span class="ticker-item"><span class="dot"></span>TypeScript</span>
+            <span class="ticker-item"><span class="dot"></span>Enterprise Scale</span>
+            <span class="ticker-item"><span class="dot"></span>WCAG Accessibility</span>
+            <span class="ticker-item"><span class="dot"></span>AG Grid</span>
+            <span class="ticker-item"><span class="dot"></span>i18n / L10n</span>
+            <span class="ticker-item"><span class="dot"></span>$500B+ Assets</span>
+            <span class="ticker-item"><span class="dot"></span>Fortune 500 Clients</span>
+            <span class="ticker-item"><span class="dot"></span>Component Systems</span>
+            <span class="ticker-item"><span class="dot"></span>RxJS</span>
+            <!-- Duplicate for seamless loop -->
+            <span class="ticker-item"><span class="dot"></span>Angular</span>
+            <span class="ticker-item"><span class="dot"></span>TypeScript</span>
+            <span class="ticker-item"><span class="dot"></span>Enterprise Scale</span>
+            <span class="ticker-item"><span class="dot"></span>WCAG Accessibility</span>
+            <span class="ticker-item"><span class="dot"></span>AG Grid</span>
+            <span class="ticker-item"><span class="dot"></span>i18n / L10n</span>
+            <span class="ticker-item"><span class="dot"></span>$500B+ Assets</span>
+            <span class="ticker-item"><span class="dot"></span>Fortune 500 Clients</span>
+            <span class="ticker-item"><span class="dot"></span>Component Systems</span>
+            <span class="ticker-item"><span class="dot"></span>RxJS</span>
+        </div>
+    </div>
+
+    <!-- About — Today's Special -->
+    <section id="about">
+        <div class="section-header reveal">
+            <span class="section-icon">📋</span>
+            <span class="section-tag">Today's Special</span>
+            <h2 class="section-title">Meet the Chef</h2>
+            <div class="wavy-divider"></div>
+        </div>
+
+        <div class="specials-grid">
+            <div class="specials-text reveal">
+                <p>Every great dish starts with a great chef, and every great interface starts with someone who <strong>obsesses over the details</strong>.</p>
+                <p>I've spent <strong>6+ years</strong> perfecting my craft in the frontend kitchen — from my early days learning the basics at <strong>Inquizity Metanoia</strong> in Mumbai, to now running the pass at <strong>DiligenceVault</strong>, where I build mission-critical FinTech applications.</p>
+                <p>My secret recipe? <strong>Accessibility-first development</strong>, a generous helping of TypeScript, a pinch of RxJS magic, and always plating for the enterprise palate. I've seasoned interfaces used by the world's largest institutional investors managing over <strong>$500 billion in assets</strong>.</p>
+                <p>Currently exploring new flavors in <strong>React, System Design, and DSA</strong> to expand the menu.</p>
+            </div>
+            <div class="reveal">
+                <div class="chef-card">
+                    <div class="chef-card-pin"></div>
+                    <div class="chef-emoji">👨‍🍳</div>
+                    <h3>Karan Kumar Gupta</h3>
+                    <span class="role">Senior Frontend Chef</span>
+                    <div class="chef-stats">
+                        <div class="chef-stat">
+                            <div class="num">6+</div>
+                            <div class="label">Years Cooking</div>
+                        </div>
+                        <div class="chef-stat">
+                            <div class="num">$500B+</div>
+                            <div class="label">Assets Served</div>
+                        </div>
+                        <div class="chef-stat">
+                            <div class="num">15+</div>
+                            <div class="label">Team Size</div>
+                        </div>
+                        <div class="chef-stat">
+                            <div class="num">EN-JP</div>
+                            <div class="label">Bilingual UI</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills — The Menu -->
+    <section id="skills">
+        <div class="section-header reveal">
+            <span class="section-icon">📜</span>
+            <span class="section-tag">The Menu</span>
+            <h2 class="section-title">What's Cooking</h2>
+            <p class="section-subtitle">Each dish is crafted from the finest ingredients</p>
+            <div class="wavy-divider"></div>
+        </div>
+
+        <div class="menu-grid">
+            <div class="menu-card reveal" data-price="⭐⭐⭐">
+                <div class="card-icon">🍝</div>
+                <h3>The Angular Carbonara</h3>
+                <p class="card-desc">Rich, complex, and deeply satisfying</p>
+                <div class="ingredients">
+                    <span class="ingredient">Angular</span>
+                    <span class="ingredient">TypeScript</span>
+                    <span class="ingredient">RxJS</span>
+                    <span class="ingredient">NgRx</span>
+                    <span class="ingredient">Angular CLI</span>
+                </div>
+            </div>
+
+            <div class="menu-card reveal" data-price="⭐⭐⭐">
+                <div class="card-icon">🥗</div>
+                <h3>Data Grid Salad</h3>
+                <p class="card-desc">Crisp, fresh, handles anything you throw at it</p>
+                <div class="ingredients">
+                    <span class="ingredient">AG Grid</span>
+                    <span class="ingredient">Excel Export</span>
+                    <span class="ingredient">Dynamic Tables</span>
+                    <span class="ingredient">Virtual Scroll</span>
+                </div>
+            </div>
+
+            <div class="menu-card reveal" data-price="⭐⭐⭐">
+                <div class="card-icon">🍱</div>
+                <h3>The Accessibility Bento</h3>
+                <p class="card-desc">Carefully arranged so everyone can enjoy</p>
+                <div class="ingredients">
+                    <span class="ingredient">WCAG 2.1</span>
+                    <span class="ingredient">ARIA</span>
+                    <span class="ingredient">Screen Readers</span>
+                    <span class="ingredient">Keyboard Nav</span>
+                </div>
+            </div>
+
+            <div class="menu-card reveal" data-price="⭐⭐">
+                <div class="card-icon">🍣</div>
+                <h3>i18n Omakase</h3>
+                <p class="card-desc">A multi-course journey across languages</p>
+                <div class="ingredients">
+                    <span class="ingredient">i18n</span>
+                    <span class="ingredient">L10n</span>
+                    <span class="ingredient">EN-JP</span>
+                    <span class="ingredient">RTL Support</span>
+                </div>
+            </div>
+
+            <div class="menu-card reveal" data-price="⭐⭐">
+                <div class="card-icon">🍰</div>
+                <h3>Component Soufflé</h3>
+                <p class="card-desc">Light, elegant, rises to every occasion</p>
+                <div class="ingredients">
+                    <span class="ingredient">Design Systems</span>
+                    <span class="ingredient">Reusable Components</span>
+                    <span class="ingredient">SCSS</span>
+                    <span class="ingredient">Storybook</span>
+                </div>
+            </div>
+
+            <div class="menu-card reveal" data-price="🌶️">
+                <div class="card-icon">🌶️</div>
+                <h3>Spicy New Flavors</h3>
+                <p class="card-desc">Currently experimenting in the test kitchen</p>
+                <div class="ingredients">
+                    <span class="ingredient">React</span>
+                    <span class="ingredient">Next.js</span>
+                    <span class="ingredient">System Design</span>
+                    <span class="ingredient">DSA</span>
+                    <span class="ingredient">Node.js</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience — Kitchen -->
+    <section id="experience">
+        <div class="exp-bg-emoji">🍳</div>
+        <div class="exp-bg-emoji">🔪</div>
+
+        <div class="section-header reveal">
+            <span class="section-icon">🏪</span>
+            <span class="section-tag">Kitchen Experience</span>
+            <h2 class="section-title">Where I've Cooked</h2>
+            <p class="section-subtitle">From prep cook to head chef</p>
+            <div class="wavy-divider"></div>
+        </div>
+
+        <div class="kitchen-timeline">
+            <div class="kitchen-item reveal" data-emoji="👨‍🍳">
+                <p class="kitchen-date">June 2022 — Present</p>
+                <h3 class="kitchen-role">Head Chef</h3>
+                <p class="kitchen-place">DiligenceVault · FinTech · Remote</p>
+                <ul class="kitchen-tasks">
+                    <li>Architecting enterprise Angular apps serving Fortune 500 investors managing $500B+ in assets</li>
+                    <li>Led WCAG accessibility across multiple core modules for inclusive experiences</li>
+                    <li>Built comprehensive English-Japanese i18n system for global expansion</li>
+                    <li>Designed questionnaire builders, workflow engines, and real-time analytics dashboards</li>
+                    <li>Established engineering standards adopted across 15-member team</li>
+                    <li>Advanced AG Grid with dynamic mapping, Excel export, and preference management</li>
+                </ul>
+            </div>
+
+            <div class="kitchen-item reveal" data-emoji="🧑‍🍳">
+                <p class="kitchen-date">June 2019 — June 2022</p>
+                <h3 class="kitchen-role">Sous Chef</h3>
+                <p class="kitchen-place">Inquizity Metanoia Pvt. Ltd. · Mumbai</p>
+                <ul class="kitchen-tasks">
+                    <li>Built responsive, user-centric interfaces with clean design and smooth interactions</li>
+                    <li>Developed foundational expertise in Angular and modern frontend practices</li>
+                    <li>Collaborated cross-functionally to turn business needs into polished products</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects — Signature Dishes -->
+    <section id="projects">
+        <div class="section-header reveal">
+            <span class="section-icon">🍽️</span>
+            <span class="section-tag">Signature Dishes</span>
+            <h2 class="section-title">Chef's Finest Work</h2>
+            <p class="section-subtitle">The dishes that keep clients coming back</p>
+            <div class="wavy-divider"></div>
+        </div>
+
+        <div class="dishes-grid">
+            <div class="dish-card reveal">
+                <div class="dish-banner"></div>
+                <div class="dish-content">
+                    <span class="dish-type">🍝 Main Course</span>
+                    <div class="dish-rating">★ 5.0</div>
+                    <h3>Questionnaire Builder Engine</h3>
+                    <p>A dynamic, configurable system for institutional investor due diligence — supporting complex logic, conditional rendering, and multi-format exports.</p>
+                    <div class="dish-tags">
+                        <span>Angular</span>
+                        <span>TypeScript</span>
+                        <span>RxJS</span>
+                        <span>Dynamic Forms</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dish-card reveal">
+                <div class="dish-banner"></div>
+                <div class="dish-content">
+                    <span class="dish-type">🥩 House Special</span>
+                    <div class="dish-rating">★ 5.0</div>
+                    <h3>Advanced Data Grid System</h3>
+                    <p>High-performance AG Grid with complex interdependencies, preference management, dynamic columns, and Excel export with custom formatting.</p>
+                    <div class="dish-tags">
+                        <span>AG Grid</span>
+                        <span>TypeScript</span>
+                        <span>Excel</span>
+                        <span>State Mgmt</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dish-card reveal">
+                <div class="dish-banner"></div>
+                <div class="dish-content">
+                    <span class="dish-type">🍱 Chef's Choice</span>
+                    <div class="dish-rating">★ 4.9</div>
+                    <h3>WCAG Compliance Framework</h3>
+                    <p>Led accessibility across enterprise modules — ARIA patterns, keyboard navigation, screen reader support, and full WCAG 2.1 AA compliance.</p>
+                    <div class="dish-tags">
+                        <span>WCAG 2.1</span>
+                        <span>ARIA</span>
+                        <span>Axe</span>
+                        <span>Angular</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dish-card reveal">
+                <div class="dish-banner"></div>
+                <div class="dish-content">
+                    <span class="dish-type">🍣 Omakase</span>
+                    <div class="dish-rating">★ 4.9</div>
+                    <h3>Internationalization System</h3>
+                    <p>Full English-Japanese localization enabling global reach with locale-specific formatting and comprehensive translation pipelines.</p>
+                    <div class="dish-tags">
+                        <span>i18n</span>
+                        <span>L10n</span>
+                        <span>Angular i18n</span>
+                        <span>Pipelines</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dish-card reveal">
+                <div class="dish-banner"></div>
+                <div class="dish-content">
+                    <span class="dish-type">🔥 Flambé</span>
+                    <div class="dish-rating">★ 4.8</div>
+                    <h3>Workflow Automation Engine</h3>
+                    <p>Custom rule-based triggers, approval chains, and notification flows for streamlining due diligence operations at enterprise scale.</p>
+                    <div class="dish-tags">
+                        <span>Angular</span>
+                        <span>RxJS</span>
+                        <span>State Machines</span>
+                        <span>APIs</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dish-card reveal">
+                <div class="dish-banner"></div>
+                <div class="dish-content">
+                    <span class="dish-type">🧁 Petit Four</span>
+                    <div class="dish-rating">★ 4.8</div>
+                    <h3>Design System Library</h3>
+                    <p>Reusable, accessible component library with comprehensive documentation — adopted as the engineering team's standard toolkit.</p>
+                    <div class="dish-tags">
+                        <span>Angular</span>
+                        <span>SCSS</span>
+                        <span>Storybook</span>
+                        <span>Docs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact — Reservations -->
+    <section id="contact">
+        <div class="contact-inner reveal">
+            <span class="section-icon">📞</span>
+            <span class="section-tag">Reservations</span>
+            <h2 class="section-title">Book a Table</h2>
+            <p class="section-subtitle">Open for collaborations, interesting projects, and good conversations about frontend engineering.</p>
+            <div class="wavy-divider"></div>
+
+            <div class="contact-cards">
+                <a href="mailto:your.email@example.com" class="contact-card wiggle">
+                    <span class="c-icon">📧</span> Email Me
+                </a>
+                <a href="https://github.com/karankumar6898" target="_blank" rel="noopener" class="contact-card wiggle">
+                    <span class="c-icon">🐙</span> GitHub
+                </a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" class="contact-card wiggle">
+                    <span class="c-icon">💼</span> LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Karan Kumar Gupta · Cooked with <span class="heart">♥</span> and lots of ☕</p>
+    </footer>
+
+    <script>
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Mobile Nav
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('open');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const top = target.getBoundingClientRect().top + window.pageYOffset - 70;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
